@@ -1,0 +1,9 @@
+<h1>Bookmarkr Demo</h1>
+
+<h3><%= link_to @bookmark.title, @bookmark.url%></h3>
+
+<p><%= @bookmark.comment %></p>
+  
+<p><% if @bookmark.favorite %> (Favorited!) <% end %></p>
+
+<p><%= link_to "All Bookmarks", root_path %></p>
