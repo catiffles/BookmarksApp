@@ -13,6 +13,16 @@ class BookmarksController < ApplicationController
     redirect_to action: :index
   end
 
+  def edit
+    @bookmark = Bookmark.find(params[:id])
+  end
+
+  def update
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.update_attributes(bookmark_params)
+    redirect_to action: :index
+  end
+
   def destroy
     @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
