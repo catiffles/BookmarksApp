@@ -1,11 +1,12 @@
 class BookmarksController < ApplicationController
 
+  before_action(:find_bookmark, only: [:show, :edit, :update, :destroy])
+
   def index
-    @bookmarks = Bookmark.all
+    @bookmarks = Bookmark.order(:title)
   end
 
   def show
-    @bookmark = Bookmark.find(params[:id])
   end
 
   def new
@@ -13,27 +14,35 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    @bookmark = Bookmark.create(bookmark_params)
-    redirect_to action: :index
+    @bookmark = Bookmark.new(bookmark_params)
+    if @bookmark.save
+      redirect_to action: :index
+    else
+      render :new
+    end
   end
 
   def edit
-    @bookmark = Bookmark.find(params[:id])
   end
 
   def update
-    @bookmark = Bookmark.find(params[:id])
-    @bookmark.update_attributes(bookmark_params)
-    redirect_to action: :index
+    if @bookmark.update_attributes(bookmark_params)
+      redirect_to action: :index
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
     redirect_to action: :index
   end
 
   private
+
+  def find_bookmark
+    @bookmark = Bookmark.find(params[:id])
+  end
 
   def bookmark_params
     params.require(:bookmark).permit(:url, :title, :comment, :favorite)
