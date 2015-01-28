@@ -5,3 +5,21 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+#Bookmark should have a url, title, comment(optional), and a favorite value(optional)
+
+Bookmark.create(
+  url: "http://generalassemb.ly",
+  title: "General Assembly",
+  comment: "Seems like this WDI thing might be interesting")
+
+Bookmark.create(
+  url: "http://facebook.com",
+  title: "Facebook",
+  comment: "Ah, the book of faces...")
+
+Bookmark.create(
+  url: "http://guides.rubyonrails.org",
+  title: "Rails GUides",
+  comment: "Probably our bible for the next few weeks",
+  favorite: true)
